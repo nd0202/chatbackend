@@ -3,14 +3,17 @@ const http = require('http');
 const socketIo = require('socket.io');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import the cors package
 
 dotenv.config();
 
 const app = express();
+app.use(cors()); // Enable CORS for all routes and origins
+
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:3000", // Allow requests from the frontend server
     methods: ["GET", "POST"]
   }
 });
